@@ -55,7 +55,7 @@ Essa página é responsável por:
 
 <!-- Inserir imagem da página success aqui -->
 
-![Página de Sucesso](./images/success.png)
+![Página de Resultados](https://github.com/divenanciodev/proma-owe1/blob/main/imagens%20da%20atividade/imagem2.png?raw=true)
 
 ---
 
