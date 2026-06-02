@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-br" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Checkout submission success page" />
+    <title>Checkout Success · Bootstrap v5.3</title>
+    <script src="../assets/js/color-modes.js"></script>
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="theme-color" content="#712cf9" />
+    <link href="checkout.css" rel="stylesheet" />
+    <style>
+      .success-card {
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+        border: none;
+        transition: transform 0.2s ease-in-out;
+      }
+      .success-card:hover {
+        transform: translateY(-2px);
+      }
+      .badge-success-custom {
+        background-color: rgba(25, 135, 84, 0.1);
+        color: #198754;
+        font-weight: 600;
+        padding: 0.5em 1em;
+        border-radius: 50rem;
+      }
+      .data-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--bs-secondary-color);
+      }
+      .data-value {
+        font-weight: 500;
+        color: var(--bs-body-color);
+      }
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(25, 135, 84, 0.15);
+        color: #198754;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+      }
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+    </style>
+  </head>
+  <body class="bg-body-tertiary">
+    <!-- Theme Toggle -->
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button
+        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-label="Toggle theme (auto)"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi my-1 theme-icon-active" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        </svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+            Light
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+            Dark
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+            Auto
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container py-5">
+      <main class="mx-auto" style="max-width: 700px;">
+        <div class="card success-card p-4 p-md-5 bg-body-surface">
+          <div class="text-center">
+            <div class="icon-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+              </svg>
+            </div>
+            <h1 class="h3 mb-2">Order Submitted Successfully!</h1>
+            <p class="text-body-secondary mb-4">Here is a summary of the details submitted in the form.</p>
+            <span class="badge-success-custom mb-4 d-inline-block">Status: Processed</span>
+          </div>
+
+          <hr class="my-4" />
+
+          <h4 class="mb-3 h5">Customer Information</h4>
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <div class="data-label">Full Name</div>
+              <div class="data-value" id="disp-fullname">-</div>
+            </div>
+            <div class="col-sm-6">
+              <div class="data-label">Username</div>
+              <div class="data-value" id="disp-username">-</div>
+            </div>
+            <div class="col-sm-6">
+              <div class="data-label">Email</div>
+              <div class="data-value" id="disp-email">-</div>
+            </div>
+            <div class="col-sm-6">
+              <div class="data-label">CPF</div>
+              <div class="data-value" id="disp-cpf">-</div>
+            </div>
+          </div>
+
+          <h4 class="mb-3 h5">Shipping / Billing Address</h4>
+          <div class="row g-3 mb-4">
+            <div class="col-12">
+              <div class="data-label">Address</div>
+              <div class="data-value" id="disp-address">-</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="data-label">Country</div>
+              <div class="data-value" id="disp-country">-</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="data-label">State</div>
+              <div class="data-value" id="disp-state">-</div>
+            </div>
+            <div class="col-sm-4">
+              <div class="data-label">Zip</div>
+              <div class="data-value" id="disp-zip">-</div>
+            </div>
+          </div>
+
+          <h4 class="mb-3 h5">Payment Information</h4>
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <div class="data-label">Payment Method</div>
+              <div class="data-value" id="disp-paymentMethod">-</div>
+            </div>
+            <div class="col-sm-6" id="cc-details-container">
+              <div class="data-label">Name on Card</div>
+              <div class="data-value mb-2" id="disp-ccName">-</div>
+              <div class="data-label">Card Number</div>
+              <div class="data-value" id="disp-ccNumber">-</div>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <a href="index.html" class="btn btn-primary btn-lg">Back to checkout</a>
+          </div>
+        </div>
+      </main>
+      <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+        <p class="mb-1">&copy; 2017–2026 Company Name</p>
+      </footer>
+    </div>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const rawData = localStorage.getItem('checkoutData');
+        if (!rawData) {
+          return;
+        }
+
+        try {
+          const data = JSON.parse(rawData);
+
+          // Populate Customer Information
+          const fullName = `${data.firstName || ''} ${data.lastName || ''}`.trim();
+          document.getElementById('disp-fullname').textContent = fullName || 'Not provided';
+          document.getElementById('disp-username').textContent = data.username ? `@${data.username}` : 'Not provided';
+          document.getElementById('disp-email').textContent = data.email || 'Not provided';
+          document.getElementById('disp-cpf').textContent = data.cpf || 'Not provided';
+
+          // Populate Address
+          let address = data.address || '';
+          if (data.address2) {
+            address += `, ${data.address2}`;
+          }
+          document.getElementById('disp-address').textContent = address || 'Not provided';
+          document.getElementById('disp-country').textContent = data.country || 'Not provided';
+          document.getElementById('disp-state').textContent = data.state || 'Not provided';
+          document.getElementById('disp-zip').textContent = data.zip || 'Not provided';
+
+          // Populate Payment Information
+          let paymentMethod = 'Not selected';
+          if (data.paymentMethod) {
+            if (data.paymentMethod === 'credit') paymentMethod = 'Credit card';
+            else if (data.paymentMethod === 'debit') paymentMethod = 'Debit card';
+            else if (data.paymentMethod === 'paypal') paymentMethod = 'PayPal';
+          }
+          document.getElementById('disp-paymentMethod').textContent = paymentMethod;
+
+          // If PayPal, hide card details, else show/populate card details
+          const ccContainer = document.getElementById('cc-details-container');
+          if (data.paymentMethod === 'paypal') {
+            ccContainer.style.display = 'none';
+          } else {
+            ccContainer.style.display = 'block';
+            document.getElementById('disp-ccName').textContent = data['cc-name'] || 'Not provided';
+
+            // Mask card number
+            const ccNum = data['cc-number'] || '';
+            if (ccNum.length > 4) {
+              const lastFour = ccNum.slice(-4);
+              document.getElementById('disp-ccNumber').textContent = `•••• •••• •••• ${lastFour}`;
+            } else if (ccNum) {
+              document.getElementById('disp-ccNumber').textContent = `•••• •••• •••• ${ccNum}`;
+            } else {
+              document.getElementById('disp-ccNumber').textContent = 'Not provided';
+            }
+          }
+        } catch (e) {
+          console.error('Error parsing checkout data', e);
+        }
+      });
+    </script>
+  </body>
+</html>
